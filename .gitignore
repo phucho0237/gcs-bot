@@ -1,2 +1,8 @@
+# vscode config
+.vscode
+
+# package
 /node_modules
+
+# environment variables
 .env
