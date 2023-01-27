@@ -1,1 +1,1 @@
-# discord-bot
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://phucho0237-improved-fiesta-gwr4x6vvqxphvwv.github.dev/)
