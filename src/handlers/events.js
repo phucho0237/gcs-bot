@@ -13,7 +13,7 @@ function loadEvents(client) {
    for (const folder of folders) {
       const files = fs
          .readdirSync(`./src/events/${folder}`)
-         .filter((f) => f.endsWith(".js"));
+         .filter(f => f.endsWith(".js"));
       for (const file of files) {
          const event = require(`../events/${folder}/${file}`);
 

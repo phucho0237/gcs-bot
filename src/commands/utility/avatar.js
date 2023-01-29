@@ -11,7 +11,7 @@ module.exports = {
       .setName("avatar")
       .setDescription("Replies with user avatar")
       .setDefaultMemberPermissions(PermissionFlagsBits.SendMessages)
-      .addUserOption((option) =>
+      .addUserOption(option =>
          option
             .setName("user")
             .setDescription("The user you want to get the avatar")
@@ -34,7 +34,9 @@ module.exports = {
                   name: `${target.user.tag}`,
                   iconURL: target.user.displayAvatarURL(),
                })
-               .setDescription(`[Avatar URL](${target.user.displayAvatarURL()})`)
+               .setDescription(
+                  `[Avatar URL](${target.user.displayAvatarURL()})`
+               )
                .setImage(
                   target.user.displayAvatarURL({
                      extension: "png",

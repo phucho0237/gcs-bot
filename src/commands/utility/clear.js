@@ -13,7 +13,7 @@ module.exports = {
          "Clear a specific amount of messages from a target or channel"
       )
       .setDefaultMemberPermissions(PermissionFlagsBits.ManageMessages)
-      .addIntegerOption((option) =>
+      .addIntegerOption(option =>
          option
             .setName("amount")
             .setDescription("The amount of messages to clear")
@@ -21,7 +21,7 @@ module.exports = {
             .setMaxValue(100)
             .setRequired(true)
       )
-      .addUserOption((option) =>
+      .addUserOption(option =>
          option
             .setName("target")
             .setDescription("The target to clear their messages")
@@ -54,9 +54,7 @@ module.exports = {
             .fetch({
                limit: amount,
             })
-            .then((messages) =>
-               messages.filter((m) => m.author.id === target.id)
-            );
+            .then(messages => messages.filter(m => m.author.id === target.id));
       } else {
          msgs = await channel.messages.fetch({
             limit: amount,
@@ -75,7 +73,7 @@ module.exports = {
       const embed = new EmbedBuilder().setColor("#32BEA6");
 
       try {
-         await channel.bulkDelete(msgs).then((msgs) => {
+         await channel.bulkDelete(msgs).then(msgs => {
             const desc = target
                ? `Successfully deleted ${msgs.size} messages from ${target}`
                : `Successfully deleted ${msgs.size} from the channel`;
