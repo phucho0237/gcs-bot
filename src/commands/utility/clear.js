@@ -35,6 +35,16 @@ module.exports = {
    async execute(interaction, client) {
       const { options, channel } = interaction;
 
+      if (
+         !channel
+            .permissionsFor(interaction.user)
+            .has(PermissionFlagsBits.ManageMessages)
+      )
+         return interaction.reply({
+            content: "You dont have permission to use this command",
+            ephemeral: true,
+         });
+
       const amount = options.getInteger("amount");
       const target = options.getMember("user");
 
