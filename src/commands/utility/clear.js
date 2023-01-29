@@ -53,16 +53,34 @@ module.exports = {
          });
       }
 
+      if (msgs.size < amount) {
+         interaction.reply({
+            content:
+               "The amount of messages to delete is greater than the total number of messages in the channel",
+            ephemeral: true,
+         });
+         return;
+      }
+
       const embed = new EmbedBuilder().setColor("#32BEA6");
 
-      await channel.bulkDelete(msgs).then((msgs) => {
-         const desc = target
-            ? `Successfully deleted ${msgs.size} messages from ${target}`
-            : `Successfully deleted ${msgs.size} from the channel`;
-         embed.setDescription(desc);
-         interaction.reply({
-            embeds: [embed],
+      try {
+         await channel.bulkDelete(msgs).then((msgs) => {
+            const desc = target
+               ? `Successfully deleted ${msgs.size} messages from ${target}`
+               : `Successfully deleted ${msgs.size} from the channel`;
+            embed.setDescription(desc);
+            interaction.reply({
+               embeds: [embed],
+            });
          });
-      });
+      } catch (err) {
+         interaction.reply({
+            content:
+               "There was a problem when executing this command. Please try again later",
+            ephemeral: true,
+         });
+         console.log(err);
+      }
    },
 };
