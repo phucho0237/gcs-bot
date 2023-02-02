@@ -8,9 +8,12 @@ const {
 
 module.exports = {
    data: new SlashCommandBuilder()
-      .setName("ping")
-      .setDescription("Replies with the bot ping")
+      .setName("status")
+      .setDescription(
+         "Show the status of the bot, included ping, uptime, etc..."
+      )
       .setDefaultMemberPermissions(PermissionFlagsBits.SendMessages),
+
    /**
     *
     * @param {ChatInputCommandInteraction} interaction
@@ -25,10 +28,14 @@ module.exports = {
       interaction.editReply({
          embeds: [
             new EmbedBuilder()
-               .setColor("Aqua")
-               .setTitle("🏓 Pong!")
+               .setColor("#32BEA6")
+               .setTitle(`${client.user.username}'s Status`)
                .setDescription(
-                  `Client: \`${ping}ms\`\nWebsocket: \`${client.ws.ping}ms\``
+                  `🏓 Bot latency: \`${ping}ms\`\n🏓 API latency: \`${
+                     client.ws.ping
+                  }ms\`\n\n⏱ Uptime: <t:${parseInt(
+                     client.readyTimestamp / 1000
+                  )}:R>`
                ),
          ],
       });
