@@ -38,7 +38,7 @@ module.exports = {
 
       if (
          !channel
-            .permissionsFor(interaction.user)
+            .permissionsFor(interaction.member)
             .has(PermissionFlagsBits.ManageMessages)
       )
          return interaction.reply({
