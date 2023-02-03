@@ -5,6 +5,7 @@ const {
    Client,
    EmbedBuilder,
 } = require("discord.js");
+const ms = require("ms");
 
 module.exports = {
    data: new SlashCommandBuilder()
@@ -41,7 +42,7 @@ module.exports = {
             .has(PermissionFlagsBits.ManageMessages)
       )
          return interaction.reply({
-            content: "You dont have permission to use this command",
+            content: "You don't have permission to use this command",
             ephemeral: true,
          });
 
@@ -78,9 +79,11 @@ module.exports = {
                ? `Successfully deleted ${msgs.size} messages from ${target}`
                : `Successfully deleted ${msgs.size} from the channel`;
             embed.setDescription(desc);
+
             interaction.reply({
                embeds: [embed],
             });
+            setTimeout(() => interaction.deleteReply(), ms("5s"));
          });
       } catch (err) {
          interaction.reply({
