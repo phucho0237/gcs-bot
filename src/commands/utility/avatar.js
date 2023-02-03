@@ -4,6 +4,9 @@ const {
    ChatInputCommandInteraction,
    Client,
    EmbedBuilder,
+   ActionRowBuilder,
+   ButtonBuilder,
+   ButtonStyle,
 } = require("discord.js");
 
 module.exports = {
@@ -26,6 +29,13 @@ module.exports = {
 
       const target = options.getMember("user") || member;
 
+      const row = new ActionRowBuilder().addComponents(
+         new ButtonBuilder()
+            .setStyle(ButtonStyle.Link)
+            .setLabel("Avatar URL")
+            .setURL(target.user.displayAvatarURL())
+      );
+
       interaction.reply({
          embeds: [
             new EmbedBuilder()
@@ -34,9 +44,6 @@ module.exports = {
                   name: `${target.user.tag}`,
                   iconURL: target.user.displayAvatarURL(),
                })
-               .setDescription(
-                  `[Avatar URL](${target.user.displayAvatarURL()})`
-               )
                .setImage(
                   target.user.displayAvatarURL({
                      extension: "png",
@@ -44,6 +51,7 @@ module.exports = {
                   })
                ),
          ],
+         components: [row],
       });
    },
 };
