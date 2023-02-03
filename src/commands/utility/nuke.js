@@ -3,6 +3,7 @@ const {
    PermissionFlagsBits,
    ChatInputCommandInteraction,
 } = require("discord.js");
+const ms = require("ms");
 
 module.exports = {
    data: new SlashCommandBuilder()
@@ -32,7 +33,9 @@ module.exports = {
       try {
          await channel.delete();
 
-         newChannel.send(`**Nuked by \`${interaction.user.tag}\`**`);
+         newChannel
+            .send(`Nuked by \`${interaction.user.tag}\``)
+            .then(msg => setTimeout(() => msg.delete(), ms("5s")));
       } catch (err) {
          interaction.reply({
             content:
