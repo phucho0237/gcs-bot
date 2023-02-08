@@ -19,10 +19,14 @@ function loadCommands(client) {
       for (const file of files) {
          const command = require(`../commands/${folder}/${file}`);
 
-         client.commands.set(command.data.name, command);
-         commandsArray.push(command.data.toJSON());
+         if (command.data.name) {
+            client.commands.set(command.data.name, command);
+            commandsArray.push(command.data.toJSON());
 
-         table.addRow(file, "✅");
+            table.addRow(file, "✅");
+         } else {
+            table.addRow(file, "❌");
+         }
       }
    }
 
