@@ -5,5 +5,33 @@
          "version": "lts"
       },
       "ghcr.io/devcontainers/features/git:1": {}
+   },
+   "customizations": {
+      "vscode": {
+         "extensions": [
+            "ms-vscode-remote.remote-containers",
+            "equinusocio.vsc-material-theme",
+            "dbaeumer.vscode-eslint",
+            "bierner.markdown-preview-github-styles",
+            "esbenp.prettier-vscode",
+            "tabnine.tabnine-vscode"
+         ],
+         "settings": {
+            "editor.minimap.enabled": false,
+            "editor.defaultFormatter": "esbenp.prettier-vscode",
+            "editor.formatOnSave": true,
+            "workbench.colorTheme": "Community Material Theme Darker High Contrast",
+            "workbench.iconTheme": "eq-material-theme-icons-darker",
+            // "editor.fontFamily": "JetBrainsMono NFM",
+            // "editor.fontLigatures": true,
+            // "terminal.integrated.fontFamily": "FiraCode NFM Retina",
+            "git.autofetch": true,
+            "prettier.arrowParens": "avoid",
+            "prettier.tabWidth": 3,
+            "security.workspace.trust.untrustedFiles": "open",
+            "workbench.startupEditor": "none",
+            "tabnine.experimentalAutoImports": true
+         }
+      }
    }
 }
