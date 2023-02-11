@@ -1,5 +1,5 @@
 const { Client, ActivityType } = require("discord.js");
-const ms = require("ms");
+const mongoose = require("mongoose");
 
 module.exports = {
    name: "ready",
@@ -20,5 +20,18 @@ module.exports = {
       });
 
       console.log(`Logged in as ${bot.user.tag}`);
+
+      if (bot.config.db.url) {
+         mongoose.set("strictQuery", false);
+         mongoose
+            .connect(bot.config.db.url)
+            .then(() => console.log("Connected to MongoDB server"))
+            .catch(err => {
+               console.log(
+                  "Error when trying to connect to MongoDB server\n",
+                  err
+               );
+            });
+      }
    },
 };
