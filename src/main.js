@@ -1,8 +1,8 @@
 const { Client, Partials, Collection } = require("discord.js");
 const ms = require("ms");
 
-const { loadEvents } = require("./handlers/events");
-const { loadCommands } = require("./handlers/commands");
+const { loadEvents } = require("./functions/events");
+const { loadCommands } = require("./functions/commands");
 
 const bot = new Client({
    intents: 131071,
