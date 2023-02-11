@@ -4,9 +4,9 @@ const fs = require("node:fs");
 
 /**
  *
- * @param {Client} client
+ * @param {Client} bot
  */
-function loadEvents(client) {
+function loadEvents(bot) {
    const table = new ascii().setHeading("Events", "Status");
 
    const folders = fs.readdirSync("./src/events");
@@ -19,22 +19,17 @@ function loadEvents(client) {
 
          if (event.rest) {
             if (event.once)
-               client.rest.once(event.name, (...args) =>
-                  event.execute(...args, client)
+               bot.rest.once(event.name, (...args) =>
+                  event.execute(...args, bot)
                );
             else
-               client.rest.on(event.name, (...args) =>
-                  event.execute(...args, client)
+               bot.rest.on(event.name, (...args) =>
+                  event.execute(...args, bot)
                );
          } else {
             if (event.once)
-               client.once(event.name, (...args) =>
-                  event.execute(...args, client)
-               );
-            else
-               client.on(event.name, (...args) =>
-                  event.execute(...args, client)
-               );
+               bot.once(event.name, (...args) => event.execute(...args, bot));
+            else bot.on(event.name, (...args) => event.execute(...args, bot));
          }
 
          table.addRow(file, "✅");

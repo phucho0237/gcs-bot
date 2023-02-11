@@ -17,9 +17,9 @@ module.exports = {
    /**
     *
     * @param {ChatInputCommandInteraction} interaction
-    * @param {Client} client
+    * @param {Client} bot
     */
-   async execute(interaction, client) {
+   async execute(interaction, bot) {
       await interaction.deferReply();
 
       const reply = await interaction.fetchReply();
@@ -29,12 +29,12 @@ module.exports = {
          embeds: [
             new EmbedBuilder()
                .setColor("#32BEA6")
-               .setTitle(`${client.user.username}'s Status`)
+               .setTitle(`${bot.user.username}'s Status`)
                .setDescription(
                   `🏓 Bot latency: \`${ping}ms\`\n🏓 API latency: \`${
-                     client.ws.ping
+                     bot.ws.ping
                   }ms\`\n\n⏱ Uptime: <t:${parseInt(
-                     client.readyTimestamp / 1000
+                     bot.readyTimestamp / 1000
                   )}:R>`
                ),
          ],

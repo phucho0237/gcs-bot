@@ -6,18 +6,18 @@ module.exports = {
    /**
     *
     * @param {ChatInputCommandInteraction} interaction
-    * @param {Client} client
+    * @param {Client} bot
     */
-   async execute(interaction, client) {
+   async execute(interaction, bot) {
       if (!interaction.isChatInputCommand) return;
 
-      const command = client.commands.get(interaction.commandName);
+      const command = bot.commands.get(interaction.commandName);
       if (!command)
          return interaction.reply({
             content: "This command is outdated",
             ephemeral: true,
          });
 
-      command.execute(interaction, client);
+      command.execute(interaction, bot);
    },
 };

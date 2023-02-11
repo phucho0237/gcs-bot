@@ -4,9 +4,9 @@ const fs = require("node:fs");
 
 /**
  *
- * @param {Client} client
+ * @param {Client} bot
  */
-function loadCommands(client) {
+function loadCommands(bot) {
    const table = new ascii().setHeading("Commands", "Status");
 
    let commandsArray = [];
@@ -20,7 +20,7 @@ function loadCommands(client) {
          const command = require(`../commands/${folder}/${file}`);
 
          if (command.data.name) {
-            client.commands.set(command.data.name, command);
+            bot.commands.set(command.data.name, command);
             commandsArray.push(command.data.toJSON());
 
             table.addRow(file, "✅");
@@ -30,7 +30,7 @@ function loadCommands(client) {
       }
    }
 
-   client.application.commands.set(commandsArray);
+   bot.application.commands.set(commandsArray);
 
    return console.log(table.toString());
 }

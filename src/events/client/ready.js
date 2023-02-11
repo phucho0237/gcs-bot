@@ -6,10 +6,10 @@ module.exports = {
    once: true,
    /**
     *
-    * @param {Client} client
+    * @param {Client} bot
     */
-   async execute(client) {
-      client.user.setPresence({
+   async execute(bot) {
+      bot.user.setPresence({
          activities: [
             {
                name: "GCS Bot | /help",
@@ -19,6 +19,6 @@ module.exports = {
          status: "dnd",
       });
 
-      console.log(`Logged in as ${client.user.tag}`);
+      console.log(`Logged in as ${bot.user.tag}`);
    },
 };

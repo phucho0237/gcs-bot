@@ -22,9 +22,8 @@ module.exports = {
    /**
     *
     * @param {ChatInputCommandInteraction} interaction
-    * @param {Client} client
     */
-   async execute(interaction, client) {
+   async execute(interaction) {
       const { options, member } = interaction;
 
       const target = options.getMember("user") || member;

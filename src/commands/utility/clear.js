@@ -31,9 +31,8 @@ module.exports = {
    /**
     *
     * @param {ChatInputCommandInteraction} interaction
-    * @param {Client} client
     */
-   async execute(interaction, client) {
+   async execute(interaction) {
       const { options, channel } = interaction;
 
       if (
