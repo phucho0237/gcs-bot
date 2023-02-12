@@ -21,15 +21,15 @@ module.exports = {
          status: "dnd",
       });
 
-      logger.info(`[CLIENT] | Logged in as ${bot.user.tag}`);
+      logger.cyan(`[CLIENT] | Logged in as ${bot.user.tag}`);
 
       if (bot.config.db.url) {
          mongoose.set("strictQuery", false);
          mongoose
             .connect(bot.config.db.url)
-            .then(() => logger.info("[DB] | Connected to MongoDB server"))
+            .then(() => logger.cyan("[DB] | Connected to MongoDB server"))
             .catch(err => {
-               logger.error(
+               logger.red(
                   "[DB] | Error when trying to connect to MongoDB server\n",
                   err
                );

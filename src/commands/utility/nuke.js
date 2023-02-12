@@ -44,7 +44,7 @@ module.exports = {
                "There was a problem when executing this command. Please try again later",
             ephemeral: true,
          });
-         logger.error(err);
+         logger.red(err);
       }
    },
 };
