@@ -18,22 +18,29 @@ function loadEvents(bot) {
       for (const file of files) {
          const event = require(`../events/${folder}/${file}`);
 
-         if (event.rest) {
-            if (event.once)
-               bot.rest.once(event.name, (...args) =>
-                  event.execute(...args, bot)
-               );
-            else
-               bot.rest.on(event.name, (...args) =>
-                  event.execute(...args, bot)
-               );
-         } else {
-            if (event.once)
-               bot.once(event.name, (...args) => event.execute(...args, bot));
-            else bot.on(event.name, (...args) => event.execute(...args, bot));
-         }
+         if (event.name) {
+            if (event.rest) {
+               if (event.once)
+                  bot.rest.once(event.name, (...args) =>
+                     event.execute(...args, bot)
+                  );
+               else
+                  bot.rest.on(event.name, (...args) =>
+                     event.execute(...args, bot)
+                  );
+            } else {
+               if (event.once)
+                  bot.once(event.name, (...args) =>
+                     event.execute(...args, bot)
+                  );
+               else
+                  bot.on(event.name, (...args) => event.execute(...args, bot));
+            }
 
-         table.addRow(file, "✅");
+            table.addRow(file, "✅");
+         } else {
+            table.addRow(file, "❌");
+         }
       }
    }
 
