@@ -2,6 +2,8 @@ const { Client } = require("discord.js");
 const ascii = require("ascii-table");
 const fs = require("node:fs");
 
+const logger = require("../utils/logger");
+
 /**
  *
  * @param {Client} bot
@@ -32,7 +34,7 @@ function loadCommands(bot) {
 
    bot.application.commands.set(commandsArray);
 
-   return console.log(table.toString());
+   return logger.cyan(table.toString());
 }
 
 module.exports = { loadCommands };
