@@ -6,6 +6,8 @@ const {
 } = require("discord.js");
 const ms = require("ms");
 
+const logger = require("../../utils/logger");
+
 module.exports = {
    data: new SlashCommandBuilder()
       .setName("slowmode")
@@ -64,7 +66,7 @@ module.exports = {
                   "There was a problem when executing this command. Please try again later",
                ephemeral: true,
             });
-            console.error(err);
+            logger.error(err);
          }
 
          return;
@@ -88,7 +90,7 @@ module.exports = {
                "There was a problem when executing this command. Please try again later",
             ephemeral: true,
          });
-         console.error(err);
+         logger.error(err);
       }
    },
 };

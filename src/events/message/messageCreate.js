@@ -25,7 +25,7 @@ module.exports = {
          return;
       if (!message.content.includes(bot.user.id)) return;
 
-      return message
+      message
          .reply({
             embeds: [
                new EmbedBuilder()

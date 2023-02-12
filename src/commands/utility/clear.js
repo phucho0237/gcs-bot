@@ -7,6 +7,8 @@ const {
 } = require("discord.js");
 const ms = require("ms");
 
+const logger = require("../../utils/logger");
+
 module.exports = {
    data: new SlashCommandBuilder()
       .setName("clear")
@@ -90,7 +92,7 @@ module.exports = {
                "There was a problem when executing this command. Please try again later",
             ephemeral: true,
          });
-         console.log(err);
+         logger.error(err);
       }
    },
 };
