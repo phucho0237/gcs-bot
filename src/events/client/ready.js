@@ -25,16 +25,18 @@ module.exports = {
 
       if (bot.config.db.url) {
          mongoose.set("strictQuery", false);
-         mongoose
+         await mongoose
             .connect(bot.config.db.url)
             .then(() => logger.cyan("[DB] | Connected to MongoDB server"))
             .catch(err => {
                logger.red(
-                  "[DB] | Error when trying to connect to MongoDB server\n",
-                  err
+                  `[DB] | Error when trying to connect to MongoDB server\n${err}`
                );
             });
       } else {
+         logger.yellow(
+            "[DB] | No MongoDB server url found, skipping connection to MongoDB"
+         );
       }
    },
 };
