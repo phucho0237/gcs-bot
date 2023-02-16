@@ -14,7 +14,7 @@ module.exports = {
       const command = bot.commands.get(interaction.commandName);
       if (!command)
          return interaction.reply({
-            content: "This command is outdated",
+            content: "This command is outdated, please try again later",
             ephemeral: true,
          });
 
