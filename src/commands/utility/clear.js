@@ -19,7 +19,7 @@ module.exports = {
       .addIntegerOption(option =>
          option
             .setName("amount")
-            .setDescription("The amount of messages to clear")
+            .setDescription("The amount of messages to clear (from 1-100)")
             .setMinValue(1)
             .setMaxValue(100)
             .setRequired(true)
