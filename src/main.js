@@ -1,20 +1,20 @@
-const { Client, Partials, Collection } = require("discord.js");
-const ms = require("ms");
-
 const { loadEvents } = require("./functions/events");
 const { loadCommands } = require("./functions/commands");
 
-const bot = new Client({
-   intents: 131071,
-   partials: [Object.keys(Partials)],
-   allowedMentions: { parse: ["everyone", "users", "roles"] },
-   rest: { timeout: ms("1m") },
-});
+const client = require("./base/Client"),
+   bot = new client();
 
-bot.commands = new Collection();
-bot.config = require("./config");
+const init = async () => {
+   bot.login(bot.config.bot.token).then(() => {
+      loadEvents(bot);
+      loadCommands(bot);
+   });
+};
 
-bot.login(bot.config.bot.token).then(() => {
-   loadEvents(bot);
-   loadCommands(bot);
-});
+init();
+
+bot.on("error", err => bot.logger.red(err)).on("warn", info =>
+   bot.logger.yellow(info)
+);
+
+process.on("unhandledRejection", err => console.error(err));
