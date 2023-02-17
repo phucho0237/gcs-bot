@@ -12,8 +12,6 @@ class client extends Client {
 
       this.commands = new Collection();
       this.config = require("../config");
-
-      this.logger = require("../utils/logger");
    }
 }
 
