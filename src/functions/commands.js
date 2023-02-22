@@ -31,10 +31,27 @@ function loadCommands(bot) {
          }
       }
    }
+   logger.cyan(table.toString());
 
-   bot.application.commands.set(commandsArray);
+   if (bot.config.bot.isGlobal === true) {
+      logger.yellow(
+         `[WARN] | You set the "isGlobal" property to "true", so the bot will load all commands globally`
+      );
 
-   return logger.cyan(table.toString());
+      return bot.application.commands.set(commandsArray);
+   } else {
+      logger.yellow(
+         `[WARN] | You set the "isGlobal" to false, so the bot will load commands only in 1 guild you specified in "devGuildID" property`
+      );
+
+      const guild = bot.guilds.cache.get(bot.config.bot.devGuildID);
+      if (!guild)
+         return logger.red(
+            "[ERR] | Guild not found: Please make sure that the guild ID is correct or not empty"
+         );
+
+      return guild.commands.set(commandsArray);
+   }
 }
 
 module.exports = { loadCommands };

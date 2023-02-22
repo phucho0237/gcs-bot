@@ -21,21 +21,21 @@ module.exports = {
          status: "dnd",
       });
 
-      logger.cyan(`[CLIENT] | Logged in as ${bot.user.tag}`);
+      logger.cyan(`[SUCCESS] | Logged in as ${bot.user.tag}`);
 
       if (bot.config.db.url) {
          mongoose.set("strictQuery", false);
          await mongoose
             .connect(bot.config.db.url)
-            .then(() => logger.cyan("[DB] | Connected to MongoDB server"))
+            .then(() => logger.cyan("[SUCCESS] | Connected to MongoDB server"))
             .catch(err => {
                logger.red(
-                  `[DB] | Error when trying to connect to MongoDB server\n${err}`
+                  `[ERR] | Error when trying to connect to MongoDB server\n${err}`
                );
             });
       } else {
          logger.yellow(
-            "[DB] | No MongoDB server url found, skipping connection to MongoDB"
+            "[WARN] | No MongoDB server url found, skipping connection to MongoDB"
          );
       }
    },
