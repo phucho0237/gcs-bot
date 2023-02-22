@@ -23,7 +23,7 @@ module.exports = {
     * @param {ChatInputCommandInteraction} interaction
     * @param {Client} bot
     */
-   async execute(interaction, bot) {
+   async execute(interaction) {
       const { options, guild } = interaction;
 
       const user = options.getUser("user");
@@ -61,6 +61,15 @@ module.exports = {
          }
       );
 
-      interaction.reply({ embeds: [embed] });
+      try {
+         interaction.reply({ embeds: [embed] });
+      } catch (err) {
+         interaction.reply({
+            content:
+               "There was a problem when executing this command. Please try again later",
+            ephemeral: true,
+         });
+         logger.red(err);
+      }
    },
 };

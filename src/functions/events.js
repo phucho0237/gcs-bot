@@ -8,6 +8,8 @@ const logger = require("../utils/logger");
  * @param {Client} bot
  */
 function loadEvents(bot) {
+   logger.blue("[INF] | Started loading events...");
+
    const table = new ascii().setHeading("Events", "Status");
 
    const folders = fs.readdirSync("./src/events");
@@ -44,7 +46,7 @@ function loadEvents(bot) {
       }
    }
 
-   return logger.cyan(table.toString());
+   return console.log(table.toString());
 }
 
 module.exports = { loadEvents };

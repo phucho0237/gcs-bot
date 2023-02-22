@@ -9,6 +9,8 @@ const logger = require("../utils/logger");
  * @param {Client} bot
  */
 function loadCommands(bot) {
+   logger.blue("[INF] | Started Loading Commands...");
+
    const table = new ascii().setHeading("Commands", "Status");
 
    let commandsArray = [];
@@ -31,13 +33,13 @@ function loadCommands(bot) {
          }
       }
    }
-   logger.cyan(table.toString());
 
    if (bot.config.bot.isGlobal === true) {
       logger.yellow(
          `[WARN] | You set the "isGlobal" property to "true", so the bot will load all commands globally`
       );
 
+      console.log(table.toString());
       return bot.application.commands.set(commandsArray);
    } else {
       logger.yellow(
@@ -45,12 +47,14 @@ function loadCommands(bot) {
       );
 
       const guild = bot.guilds.cache.get(bot.config.bot.devGuildID);
-      if (!guild)
-         return logger.red(
+
+      if (guild) return guild.commands.set(commandsArray);
+      else {
+         logger.red(
             "[ERR] | Guild not found: Please make sure that the guild ID is correct or not empty"
          );
-
-      return guild.commands.set(commandsArray);
+         process.exit(1);
+      }
    }
 }
 
