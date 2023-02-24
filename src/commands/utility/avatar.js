@@ -24,9 +24,8 @@ module.exports = {
     * @param {ChatInputCommandInteraction} interaction
     */
    async execute(interaction) {
-      const { options, member } = interaction;
-
-      const target = options.getMember("user") || member;
+      const target =
+         interaction.options.getMember("user") || interaction.member;
 
       const row = new ActionRowBuilder().addComponents(
          new ButtonBuilder()

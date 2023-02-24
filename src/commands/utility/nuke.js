@@ -17,10 +17,8 @@ module.exports = {
     * @param {ChatInputCommandInteraction} interaction
     */
    async execute(interaction) {
-      const { channel } = interaction;
-
       if (
-         !channel
+         !interaction.channel
             .permissionsFor(interaction.member)
             .has(PermissionFlagsBits.ManageChannels)
       )
@@ -29,11 +27,11 @@ module.exports = {
             ephemeral: true,
          });
 
-      const newChannel = await channel.clone();
-      await newChannel.setPosition(channel.position);
+      const newChannel = await interaction.channel.clone();
+      await newChannel.setPosition(interaction.channel.position);
 
       try {
-         await channel.delete();
+         await interaction.channel.delete();
 
          newChannel
             .send(`Nuked by \`${interaction.user.tag}\``)

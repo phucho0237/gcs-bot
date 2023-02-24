@@ -24,11 +24,9 @@ module.exports = {
     * @param {Client} bot
     */
    async execute(interaction) {
-      const { options, guild } = interaction;
+      const user = interaction.options.getUser("user");
 
-      const user = options.getUser("user");
-
-      const member = guild.members.cache.get(user.id);
+      const member = interaction.guild.members.cache.get(user.id);
 
       const embed = new EmbedBuilder().setColor("#32BEA6").addFields(
          {
@@ -55,7 +53,7 @@ module.exports = {
          {
             name: "Roles",
             value: member.roles.cache
-               .filter(r => r.id !== guild.roles.everyone.id)
+               .filter(r => r.id !== interaction.guild.roles.everyone.id)
                .map(role => role.toString())
                .join(", "),
          }

@@ -24,12 +24,10 @@ module.exports = {
     * @param {ChatInputCommandInteraction} interaction
     */
    async execute(interaction) {
-      const { options, channel } = interaction;
-
-      let time = options.getString("time");
+      let time = interaction.options.getString("time");
 
       if (
-         !channel
+         !interaction.channel
             .permissionsFor(interaction.member)
             .has(PermissionFlagsBits.ManageChannels)
       )
@@ -50,7 +48,7 @@ module.exports = {
          time = ms("6h");
 
          try {
-            await channel.setRateLimitPerUser(time);
+            await interaction.channel.setRateLimitPerUser(time);
             return interaction.reply({
                embeds: [
                   new EmbedBuilder()
@@ -73,7 +71,7 @@ module.exports = {
       }
 
       try {
-         await channel.setRateLimitPerUser(ms(time));
+         await interaction.channel.setRateLimitPerUser(ms(time));
          interaction.reply({
             embeds: [
                new EmbedBuilder()

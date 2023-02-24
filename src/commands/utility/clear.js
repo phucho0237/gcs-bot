@@ -35,10 +35,11 @@ module.exports = {
     * @param {ChatInputCommandInteraction} interaction
     */
    async execute(interaction) {
-      const { options, channel } = interaction;
+      const amount = interaction.options.getInteger("amount");
+      const target = interaction.options.getMember("user");
 
       if (
-         !channel
+         !interaction.channel
             .permissionsFor(interaction.member)
             .has(PermissionFlagsBits.ManageMessages)
       )
@@ -47,18 +48,15 @@ module.exports = {
             ephemeral: true,
          });
 
-      const amount = options.getInteger("amount");
-      const target = options.getMember("user");
-
       let msgs;
       if (target) {
-         msgs = await channel.messages
+         msgs = await interaction.channel.messages
             .fetch({
                limit: amount,
             })
             .then(messages => messages.filter(m => m.author.id === target.id));
       } else {
-         msgs = await channel.messages.fetch({
+         msgs = await interaction.channel.messages.fetch({
             limit: amount,
          });
       }
@@ -75,7 +73,7 @@ module.exports = {
       const embed = new EmbedBuilder().setColor("#32BEA6");
 
       try {
-         await channel.bulkDelete(msgs).then(msgs => {
+         await interaction.channel.bulkDelete(msgs).then(msgs => {
             const desc = target
                ? `Successfully deleted ${msgs.size} messages from ${target}`
                : `Successfully deleted ${msgs.size} from the channel`;
