@@ -10,6 +10,9 @@ module.exports = {
 
       // Dev guild ID (optional if you want to set isGlobal to false)
       devGuildID: "",
+
+      // Owner ID
+      ownerId: [""],
    },
    db: {
       url: process.env.MONGO_URL,

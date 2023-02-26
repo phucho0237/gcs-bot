@@ -18,6 +18,14 @@ module.exports = {
             ephemeral: true,
          });
 
+      if (
+         command.ownerOnly &&
+         !bot.config.bot.ownerId.includes(interaction.user.id)
+      )
+         return interaction.reply({
+            content: "Sorry, but you can't use this command",
+            ephemeral: true,
+         });
       command.execute(interaction, bot);
    },
 };

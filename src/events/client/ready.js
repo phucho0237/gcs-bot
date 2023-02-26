@@ -27,7 +27,7 @@ module.exports = {
          mongoose.set("strictQuery", false);
          await mongoose
             .connect(bot.config.db.url)
-            .then(() => logger.cyan("[CLIENT] | Connected to MongoDB server"))
+            .then(() => logger.cyan("[DB] | Connected to MongoDB server"))
             .catch(err => {
                logger.red(
                   `[ERR] | Error when trying to connect to MongoDB server\n${err}`
