@@ -34,9 +34,8 @@ module.exports = {
                      `Hi, I am \`${bot.user.username}\`\nTo see all my commands, type \`/\` & click on my logo to see all my commands`
                   )
                   .setFooter({
-                     text: "This message will automatically delete in 10 seconds.",
-                  })
-                  .setTimestamp(),
+                     text: "This message will automatically delete in 10 seconds",
+                  }),
             ],
             components: [
                new ActionRowBuilder().addComponents(
