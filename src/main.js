@@ -6,6 +6,7 @@ const client = require("./base/Client"),
 
 const init = async () => {
    bot.login(bot.config.bot.token).then(() => {
+      bot.dashboard.init();
       loadEvents(bot);
       loadCommands(bot);
    });

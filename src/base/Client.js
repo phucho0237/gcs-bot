@@ -1,6 +1,8 @@
 const { Client, Partials, Collection } = require("discord.js");
 const ms = require("ms");
 
+const { Dashboard } = require("../dashboard");
+
 class client extends Client {
    constructor() {
       super({
@@ -12,6 +14,8 @@ class client extends Client {
 
       this.commands = new Collection();
       this.config = require("../config");
+
+      this.dashboard = new Dashboard(this);
    }
 }
 
